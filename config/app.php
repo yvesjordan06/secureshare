@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'force_ssl' => env('FORCE_SSL', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
