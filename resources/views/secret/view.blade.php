@@ -70,7 +70,7 @@
     </div>
   </div>
 @endif
-    <form class="flex justify-center mt-8" method="POST" action="{{ route('secret.unlock', $receiver->id) }}">
+    <form class="flex justify-center mt-8" id="form" method="POST" action="{{ route('secret.unlock', $receiver->id) }}">
         @csrf
         <div class="card w-96 p-8 border border-base-content/20 bg-base-100/70 backdrop-blur-sm  shadow-xl">
             <h1 class="text-xl font-bold text-center">Open secret</h1>
@@ -110,6 +110,23 @@
           }
           document.querySelector('#code').value = code;
         });
+      });
+
+
+      // Intercept form submission in case the user pastes the code
+      document.querySelector('#form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        var code = '';
+          for (var i = 0; i < 4; i++) {
+            code += index === i ? pinInput[i].value : document.querySelector('#code').value.charAt(i);
+          }
+          document.querySelector('#code').value = code;
+
+
+        document.querySelector('#form').submit();
+
+
       });
     });
 </script>
