@@ -26,7 +26,7 @@
             <h1 class="text-xl font-bold text-center">Your secret</h1>
 
            <div class="mt-8 flex flex-col">
-            <div class=" mt-4 flex space-x-3 whitespace-pre p-4 rounded-md border border-primary font-bold">
+            <div class=" mt-4 flex whitespace-pre-wrap space-x-3 p-4 rounded-md border border-primary font-bold">
                <p>{{ $secret->content }}</p>
             </div>
 
