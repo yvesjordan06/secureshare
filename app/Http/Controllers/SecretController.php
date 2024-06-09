@@ -95,7 +95,7 @@ class SecretController extends Controller
 
         if ($receiver->access_code !== $code) {
 
-            return redirect()->back()->withErrors(['code' =>'Invalid unlock code, a new code has been sent to ' . $receiver->email]);
+            return redirect()->back()->withErrors(['code' =>'Invalid unlock code, a code has been sent to ' . $receiver->email . '. If you did not receive it, please click on "Resend" below.']);
         }
 
         $receiver->viewed_at = now();
