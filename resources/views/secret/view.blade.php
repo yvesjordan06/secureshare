@@ -117,11 +117,11 @@
       document.querySelector('#form').addEventListener('submit', function(event) {
         event.preventDefault();
 
-        var code = '';
+        var code = ['','','',''];
           for (var i = 0; i < 4; i++) {
-            code += index === i ? pinInput[i].value : document.querySelector('#code').value.charAt(i);
+            code[i] = pinInput[i].value
           }
-          document.querySelector('#code').value = code;
+          document.querySelector('#code').value = code.join('');
 
 
         document.querySelector('#form').submit();
