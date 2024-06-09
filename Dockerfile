@@ -2,17 +2,21 @@
 FROM php:8.2-fpm
 
 # Install system dependencies
+ARG user
+ARG uid
+
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     git \
     curl \
     libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    zip \
-    unzip \
-    nano \
     libonig-dev \
     libxml2-dev \
+    zip \
+    unzip \
+    supervisor \
+    nginx \
+    build-essential \
     nodejs \
     npm
 
