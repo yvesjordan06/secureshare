@@ -6,7 +6,7 @@ Route::get('/', function () {
     return redirect('/secrets/create');
 });
 
-Route::get('/healtcheck', function () {
+Route::get('/healthcheck', function () {
     return 'OK';
 });
 
