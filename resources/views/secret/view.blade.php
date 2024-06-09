@@ -74,7 +74,7 @@
         @csrf
         <div class="card w-96 p-8 border border-base-content/20 bg-base-100/70 backdrop-blur-sm  shadow-xl">
             <h1 class="text-xl font-bold text-center">Open secret</h1>
-
+            <p>We have sent an unlock code to your email, please enter it below</p>
            <div class="mt-8 flex flex-col">
             <label for="content ">Enter the unlock code sent to : {{ $receiver->email }}</label>
             <div class="flex space-x-3 h-10 mt-4" data-hs-pin-input="">
@@ -89,6 +89,10 @@
 
 
               <input type="submit" class="btn btn-secondary mt-4" value="Unlock Now"></button>
+
+              <div class="mt-4">
+                Did not receive the code? <a href="{{ route('secret.view',[ $receiver->id, 'resend' => true]) }}" class="btn btn-ghost ml-2">Resend</a>
+              </div>
          </div>
 
 </div>

@@ -71,12 +71,17 @@ class SecretController extends Controller
         abort(404);
        }
 
+       $hasCode = $receiver->access_code !== null;
+       $resendQuery = $request->query('resend');
+       if (!$hasCode || $resendQuery) {
+        $receiver->access_code = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
 
-       $receiver->access_code = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+            $receiver->save();
 
-        $receiver->save();
+            Notification::route('mail', $receiver->email)->notify(new SecretAccessNotification($receiver));
 
-        Notification::route('mail', $receiver->email)->notify(new SecretAccessNotification($receiver));
+            return redirect()->route("secret.view", $id)->with('success', 'New unlock code sent to ' . $receiver->email);
+       }
 
         return view('secret.view', compact('receiver', 'secret'));
     }
