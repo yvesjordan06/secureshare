@@ -1,57 +1,7 @@
-# Base image with PHP 8.2
-FROM php:8.2-fpm
-
-# Install system dependencies
-ARG user
-ARG uid
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    supervisor \
-    nginx \
-    build-essential \
-    nodejs \
-    npm
-
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
-
-# Install PHP extensions
-RUN docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
-
-# Get latest Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root -u $uid -d /home/$user $user
-RUN mkdir -p /home/$user/.composer && \
-    chown -R $user:$user /home/$user
-
-WORKDIR /var/www
-
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --optimize-autoloader --no-scripts
-
+FROM docker.io/bitnami/laravel:latest
 COPY . .
-
-RUN chown -R $uid:$uid /var/www
-
-# Install npm dependencies
-RUN npm install
-
-# Build npm assets
+RUN composer install
+RUN npm ci
 RUN npm run build
-
-
-# copy supervisor configuration
-COPY ./supervisord.conf /etc/supervisord.conf
-
-# run supervisor
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
+CMD php artisan serve --host=0.0.0.0
+EXPOSE 443
