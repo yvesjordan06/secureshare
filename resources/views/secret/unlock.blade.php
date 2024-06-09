@@ -37,6 +37,9 @@
 
 
               <button  class="btn btn-secondary mt-4" id="copy"  data-clipboard-text="{{ $secret->content }}" >Copy</button>
+              <a href="{{ route('secret.create') }}" class="btn btn-primary mt-4">Create a new secret</a>
+
+
          </div>
 
 </div>
