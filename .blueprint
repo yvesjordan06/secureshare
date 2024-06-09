@@ -1,0 +1,18 @@
+created:
+    - app/Http/Controllers/SecretController.php
+    - database/factories/SecretFactory.php
+    - database/factories/ReceiverFactory.php
+    - database/migrations/2024_06_09_125041_create_secrets_table.php
+    - database/migrations/2024_06_09_125042_create_receivers_table.php
+    - app/Models/Secret.php
+    - app/Models/Receiver.php
+    - tests/Feature/Http/Controllers/SecretControllerTest.php
+    - app/Http/Requests/SecretStoreRequest.php
+    - app/Notification/NewSecretNotification.php
+    - resources/views/secret/create.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: string, email_verified_at: 'datetime nullable', password: string, remember_token: 'string nullable' }
+    Secret: { content: longtext, user_id: 'id nullable', delete_when_viewed: boolean, valid_until: 'datetime nullable', stat_access_code: 'string nullable', relationships: { hasMany: Receiver } }
+    Receiver: { secret_id: id, email: email, access_code: 'string nullable', viewed_at: 'datetime nullable' }

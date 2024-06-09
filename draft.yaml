@@ -1,0 +1,28 @@
+models:
+  Secret:
+    content: longtext
+    user_id: id nullable
+    delete_when_viewed: boolean
+    valid_until: datetime nullable
+    stat_access_code: string nullable
+    relationships:
+      hasMany: Receiver
+
+  Receiver:
+    secret_id: id
+    email: email
+    access_code: string nullable
+    viewed_at: datetime nullable
+
+
+controllers:
+  Secret:
+    create:
+      render: secret.create
+    store:
+      validate: content,
+      save: secret
+      send: NewSecretNotification to:secret.content with:secret
+      flash: secret.id
+      redirect: secret.create
+
