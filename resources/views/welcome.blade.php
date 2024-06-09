@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <script defer src="https://umami.coolify-apps.hirodiscount.com/script.js" data-website-id="4ed22cf8-528b-4aa1-a549-5d16dd6e277b"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
