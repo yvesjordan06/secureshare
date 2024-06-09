@@ -37,9 +37,8 @@ class NewSecretNotification extends Notification
     {
         return (new MailMessage)
             ->line('A new secret has been shared with you')
-->action('Open Now', route('secret.view', $this->receiver->id))
-            ->line('Once you open, you\'ll receive a direct link to the secret wich you can view only once')
-            ->line('This secret has been shared with: ' . $this->receiver->email)
+            ->line('Click the button below to open it.')
+            ->action('Open Now', route('secret.view', $this->receiver->id))
             ->line('SecureShare, Keep it private. Keep it safe.');
     }
 
