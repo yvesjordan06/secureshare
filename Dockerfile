@@ -41,7 +41,6 @@ RUN npm install
 RUN npm run build
 
 # Run PHP artisan commands
-RUN php artisan key:generate
 RUN php artisan config:cache
 RUN php artisan route:cache
 RUN php artisan view:cache
