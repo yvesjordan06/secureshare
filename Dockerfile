@@ -44,5 +44,4 @@ RUN npm run build
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 
-# Command to run after the container starts
-CMD ["sh", "-c", "php artisan migrate && php-fpm"]
+CMD ["php-fpm"]
