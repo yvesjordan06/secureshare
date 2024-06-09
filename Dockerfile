@@ -40,10 +40,6 @@ RUN npm install
 # Build npm assets
 RUN npm run build
 
-# Run PHP artisan commands
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
 
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
