@@ -16,7 +16,12 @@ class SecretController extends Controller
 {
     public function create(Request $request): View
     {
-        return view('secret.create');
+        //Get the emails from the request query ?receivers=email1,email2
+        $emails = $request->query('receivers');
+
+        //Replace the , with \n
+        $emails = str_replace(',', "\n", $emails);
+        return view('secret.create', compact('emails'));
     }
 
     public function store(SecretStoreRequest $request)

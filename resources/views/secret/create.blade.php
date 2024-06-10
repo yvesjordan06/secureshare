@@ -67,20 +67,19 @@
     </div>
   </div>
 @endif
-    <form class="flex justify-center mt-8" method="POST" action="{{ route('secret.store') }}">
+    <form class="flex justify-center mt-8" id="form" method="POST" action="{{ route('secret.store') }}">
         @csrf
         <div class="card w-96 p-8 border border-base-content/20 bg-base-100/70 backdrop-blur-sm  shadow-xl">
             <h1 class="text-xl font-bold text-center">Create a new secret</h1>
 
            <div class="mt-8 flex flex-col">
             <label for="content ">Enter your secret</label>
-            <textarea  name="content" class="textarea textarea-bordered mt-2 focus:outline-primary" required placeholder="Password: MySecretPassword"></textarea>
+            <textarea  name="content" class="textarea textarea-bordered mt-2 focus:outline-primary" rows="3" required placeholder="Password: MySecretPassword">{{ old('content') }}</textarea></textarea>
            </div>
 
-            <label for="receivers" class="mt-4">Share with</label>
-            <textarea name="receivers" class="textarea textarea-bordered mt-2 focus:outline-primary" required  placeholder="email@domain.tld"></textarea>
+            <label for="receivers" class="mt-4">Sharing with</label>
+            <textarea name="receivers" class="textarea textarea-bordered mt-2 focus:outline-primary"  rows="4"  placeholder="email@domain.tld">{{ old('receivers') ?? $emails  }}</textarea>
             <p class="text-xs  text-base-content/90">Enter each email on a new line</p>
-
 
             <div class="form-control mt-4 hidden">
                 <label class="label cursor-pointer">
@@ -89,11 +88,30 @@
                 </label>
               </div>
 
-              <input type="submit" class="btn btn-secondary mt-4" value="Share the secret"></button>
+              <input type="submit" id="btn" class="btn btn-secondary mt-4" value="Share the secret"></button>
          </div>
 
 </div>
 
+<script>
+    // We need to wait for the DOM to be ready
+    document.addEventListener("DOMContentLoaded", function() {
+      //Capturing the form
+      var form = document.querySelector('#form');
 
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        //Make the button disabled and change the text
+        document.querySelector('#btn').disabled = true;
+        document.querySelector('#btn').value = 'Sending...';
+
+        //Submit the form
+        form.submit();
+      });
+
+
+    });
+</script>
 </body>
 </html>
